@@ -11,6 +11,11 @@
                 color: #000000;
                 font-family: 'League Spartan', arial, helvetica, sans-serif;
                 text-align: center;
+                min-height: 100vh;
+                position: relative;
+                padding-bottom: 120px;
+                box-sizing: border-box;
+                margin: 0;
             }
             .shadow {
                 filter: drop-shadow(5px 5px 5px #aaa);
@@ -21,21 +26,34 @@
                 object-fit: cover; /* この一行を追加するだけ！ */
             }
             footer {
+                background-color: #000000;
                 color: #999999;
                 position: absolute;
                 bottom: 0;
                 width: 100%;
             }
+            hr {
+                border: 2px solid #D0D7DE;
+                width: 50%;
+                border-radius: 5px 5px 5px 5px;
+                margin: 32 auto;
+            }
         </style>
         <h1>Welcome to LOGIC page</h1>
+
+        <hr>
+        <h2>ScreenShot</h2>
         <img class="shadow img" src="screenshot.png">
 
+        <hr>
         <h2>About</h2>
         <p>LOGIC is a simple low-code application on Windows.</p>
 
+        <hr>
         <h2>Download</h2>
         <p>download 1.0.0 coming soon!</p>
 
+        <hr>
         <h2>Update history</h2>
         <table align="center" border="1">
             <tr>
@@ -50,6 +68,7 @@
             </tr>
         </table>
 
+        <hr>
         <h2>Contact</h2>
         <p>contact@logic.biz</p>
 
