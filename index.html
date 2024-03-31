@@ -1,12 +1,10 @@
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <meta name="description" content="The official home of the LOGIC download page" />
         <link rel="icon" href="/favicon.ico" sizes="any">
         <title>LOGIC</title>
-    </head>
-    <body>
         <style>
             body {
                 background-color: #ffffff;
@@ -44,7 +42,22 @@
                 border-radius: 5px 5px 5px 5px;
                 margin: 32 auto;
             }
+            table {
+                text-align: left;
+                border-collapse: collapse;
+                width: 80%;
+                margin: 0 auto;
+                border: 1px solid #d0d7de;
+            }
+            table td {
+                background: #eee;
+            }
+            table tr:nth-child(odd) td {
+                background: #fff;
+            }
         </style>
+    </head>
+    <body>
         <h1>LOGIC</h1>
 
         <hr>
@@ -53,7 +66,7 @@
 
         <hr>
         <h2>ScreenShot</h2>
-        <img class="shadow img" src="screenshot.png">
+        <img class="shadow img" src="screenshot.png" alt="screenshot">
 
         <hr>
         <h2>Download</h2>
@@ -61,7 +74,7 @@
 
         <hr>
         <h2>Update history</h2>
-        <table align="center" border="1">
+        <table>
             <tr>
                 <th>Version</th>
                 <th>Release Date</th>
@@ -69,7 +82,7 @@
             </tr>
             <tr>
                 <td>1.0.0.0</td>
-                <td>2023/12/01</td>
+                <td>2024/04/01</td>
                 <td>first release</td>
             </tr>
         </table>
@@ -79,8 +92,13 @@
         <p>contact@logic.biz</p>
 
         <footer>
-            <p>Copyright &copy; 2023 LOGIC Software Developer All Rights Reserved.</p>
+            <p>Copyright &copy; <span id="current-year"></span> LOGIC Software Developer All Rights Reserved.</p>
         </footer>
 
+        <script>
+            window.onload = function() {
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+            };
+        </script>
     </body>
 </html>
