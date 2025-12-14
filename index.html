@@ -1,335 +1,272 @@
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
-        <meta name="description" content="The official home of the LogicPad download page" />
-        <link rel="icon" href="/favicon.ico" sizes="any">
-        <title>LogicPad</title>
-        <style>
-            body {
-                background-color: #ffffff;
-                color: #444444;
-                font-family: 'League Spartan', arial, helvetica, sans-serif;
-                text-align: center;
-                min-height: 100vh;
-                position: relative;
-                padding-top: 40px;
-                padding-bottom: 120px;
-                box-sizing: border-box;
-                margin: 0;
-            }
-            h1 {
-                font-size: 80px;
-            }
-            h2 {
-                font-size: 32px;
-            }            
-            .shadow {
-                filter: drop-shadow(5px 5px 5px #d0d7de);
-            }
-            img {
-                width: 50%;
-                max-width: max-content;
-                object-fit: cover; /* この一行を追加するだけ！ */
-            }
-            footer {
-                background-color: #000000;
-                color: #999999;
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-            }
-            hr {
-                border: 2px solid #d0d7de;
-                width: 80%;
-                border-radius: 5px 5px 5px 5px;
-                margin: 32 auto;
-            }
-            table {
-                text-align: left;
-                border-collapse: collapse;
-                width: 80%;
-                margin: 0 auto;
-                border: 1px solid #d0d7de;
-            }
-            table td {
-                background: #eee;
-            }
-            table tr:nth-child(odd) td {
-                background: #fff;
-            }
-        </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8NL480M58"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LogicPad | Visual Programming Platform for Windows</title>
+  <meta name="description" content="LogicPad is a Windows-first visual programming platform inspired by Microsoft design principles. Build reliable automation with clarity and control.">
 
-  gtag('config', 'G-Z8NL480M58');
-</script>        
-    </head>
-    <body>
-        <h1>LogicPad</h1>
-        <h3>Visual Programming. No Limits.</h3>
+  <style>
+  :root {
+    --ms-blue: #0067c0;
+    --ms-blue-hover: #005ba1;
+    --bg-light: #f5f5f5;
+    --bg-section: #ffffff;
+    --bg-muted: #f3f4f6;
+    --text-main: #111827;
+    --text-sub: #374151;
+    --border-light: #e5e7eb;
+  }
 
-        <hr>
-        <h2>About</h2>
-        <p>LogicPad is a low-code application development platform that simplifies the process of building software applications on the Windows operating system.<br>
-           It provides an intuitive interface and drag-and-drop functionality, allowing users to create applications without extensive programming knowledge.<br>
-           LogicPad was born from over two decades of experience in C++ development, with the goal of turning accumulated technical knowledge into something meaningful and accessible to everyone.<br>
-           Whether you're a student just beginning to learn programming, a business professional aiming to streamline daily workflows, or an engineer involved in digital transformation, LogicPad is designed to empower you.<br>
-           What sets LogicPad apart is its AI-friendly architecture, enabling seamless integration with modern AI tools and workflows.<br>
-           Additionally, the platform supports 97 languages, making it accessible to users all around the world.<br>
-           Most importantly, it is <b>completely free to use</b>, in the spirit of leaving no one behind.</p>
-        <p>🟡 <b>We value your feedback</b><br>
-           As LogicPad is still in its early stages, your thoughts and suggestions are incredibly valuable.<br>
-           Please don’t hesitate to share your feedback — no matter how small — via the form below.<br>
-           <br>
-           👉 <a href="https://logicpad.org/feedback">https://logicpad.org/feedback</a><br>
-           <br>
-           Together, let's make software development easier, lighter, and more enjoyable for everyone.</p>
-        <hr>
-        <h2>ScreenShot</h2>
-        <img class="shadow img" src="screenshot.png" alt="screenshot">
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--text-main);
+    line-height: 1.65;
+    background: var(--bg-light);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-        <hr>
-        <h2>Download</h2>
-        <p><a href="https://github.com/LogicCreate/LOGIC-MAIN.github.io/releases/download/0.0.0.78/Setup.exe">Setup.exe (beta)</a></p>
-        <p>
-            <script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
-            <ms-store-badge
-            	productid="9p3kn8cgsw72"
-            	productname="LogicPad"
-            	window-mode="direct"
-            	theme="auto"
-            	size="large"
-            	language="en"
-            	animation="on">
-            </ms-store-badge>
-        </p>
+  /* Hero */
+  header.hero {
+    min-height: 100vh;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
+      url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80");
+    background-size: cover;
+    background-position: center;
+  }
 
-        <hr>
-        <h2>History</h2>
-        <table>
-            <tr>
-                <th>Version</th>
-                <th>Release Date</th>
-                <th>Release content</th>
-            </tr>
-            <tr>
-                <td>0.0.0.78(beta)</td>
-                <td>2025/08/02</td>
-                <td>
-・Add a node to create an Excel worksheet<br />
-・Add a node to run Excel macros<br />
-・Add a node to get the image size<br />
-・Other minor bug fixes
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.77(beta)</td>
-                <td>2025/07/29</td>
-                <td>
-・Added mail sending node<br />
-・Added posting node to Teams channel<br />
-・Added posting node to Slack<br />
-・Added JScript execution node<br />
-・Added VBScript execution node<br />
-・Other minor bug fixes
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.76(beta)</td>
-                <td>2025/07/07</td>
-                <td>
-・Add a text input node.<br />
-・Add a node to set a value in an Excel cell.<br />
-・Add a node to get a value from an Excel cell.<br />
-・Add a node to insert an image into an Excel cell.<br />
-・Add a node to post to X (formerly Twitter).
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.75(beta)</td>
-                <td>2025/06/03</td>
-                <td>
-・File format change (Note: data saved in the new version cannot be opened in the old version).<br />
-・Added a warning message when loading data saved in the new version.<br />
-・Change the save path for database files.<br />                    
-・Fixed other minor bugs.
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.74(beta)</td>
-                <td>2025/05/27</td>
-                <td>
-・Fixed a bug that port numbers and schemes were not recognized when connecting to the Internet.<br />
-・Variables dialog can now read images in webp format.<br />
-・Fixed other minor bugs.
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.73(beta)</td>
-                <td>2025/05/26</td>
-                <td>
-・Add REST API node.<br />
-・added support for specifying non-string variables in output nodes.<br />
-・added the ability to read webp format in the image loading node.<br />
-・Fixed other minor bugs.
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.72(beta)</td>
-                <td>2025/05/15</td>
-                <td>
-・Add javascript execution node.<br />
-・Added node to set HTML for internal browser.<br />
-・Variables can now be set to property items in multi-line text.<br />
-・Fixed other minor bugs.
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.71(beta)</td>
-                <td>2025/05/11</td>
-                <td>
-・Add nodes that use AI compatible with OpenAI API.<br />
-・Automatic placement adjustment when a node is placed on top of an edge.<br />
-・Fixed a bug that caused errors in the browser text setting node.<br />
-・Fixed other minor bugs.
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.70(beta)</td>
-                <td>2025/05/02</td>
-                <td>
-・Fixed a bug where Windows batch nodes were not working.<br />
-・Multilingual support (97 languages supported)
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.69(beta)</td>
-                <td>2025/04/27</td>
-                <td>
-・Add a node to run C#<br />
-・Add a node to run Visual Basic<br />
-・Add a node to convert to uppercase<br />
-・Add a node to convert to lowercase<br />
-・Added RUN option to program startup arguments<br />
-・Fixed other minor bugs
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.68(beta)</td>
-                <td>2025/04/22</td>
-                <td>
-・Update check function added<br />
-・Organize node folders, organize menus
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.67(beta)</td>
-                <td>2025/04/21</td>
-                <td>
-・Add a node to search text<br />
-・Add node for text replacement<br />
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.66(beta)</td>
-                <td>2025/04/17</td>
-                <td>
-・Add node to run powershell code
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.65(beta)</td>
-                <td>2025/04/15</td>
-                <td>
-・Add a node to determine the existence of a file<br />
-・Add node to convert to string type<br />
-・Add node to convert to number type
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.64(beta)</td>
-                <td>2025/04/11</td>
-                <td>
-・Added regular expression matching to IF node
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.63(beta)</td>
-                <td>2025/04/10</td>
-                <td>
-・Added toast node
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.62(beta)</td>
-                <td>2025/04/09</td>
-                <td>
-・Added Luma node<br />
-・added displaying node creation dialog with arrow key when no node is placed.<br />
-・modified to associate the program with the extension lpf
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.61(beta)</td>
-                <td>2025/04/08</td>
-                <td>
-・Added internal browser display switching node<br />
-・Output window display switching node added<br />
-・String acquisition node added in XPath<br />
-・Output string acquisition node added<br />
-・Changed color of client area<br />
-・Changed installation folder to x64 path
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.60(beta)</td>
-                <td>2025/04/07</td>
-                <td>
-・Add exception node<br />
-・Add runway node (incomplete)<br />
-・Fixed comment resizing bug
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.59(beta)</td>
-                <td>2025/04/03</td>
-                <td>
-・Add Perplexity node
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.58(beta)</td>
-                <td>2025/04/03</td>
-                <td>
-・Added a node to generate images using Stable Diffusion<br />
-・Added a node to get mouse coordinates<br />
-・Added a node to set mouse coordinates
-                </td>
-            </tr>
-            <tr>
-                <td>0.0.0.57(beta)</td>
-                <td>2025/04/01</td>
-                <td>First release</td>
-            </tr>
-        </table>
+  .hero-inner {
+    max-width: 960px;
+  }
 
-        <hr>
-        <h2>Contact</h2>
-        <p>contact@logicpad.org</p>
+  header.hero h1 {
+    font-size: clamp(3rem, 5vw, 4rem);
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
 
-        <footer>
-            <p>Copyright &copy; <span id="current-year"></span> LogicPad Software Developer All Rights Reserved.</p>
-        </footer>
+  header.hero p {
+    font-size: 1.25rem;
+    color: var(--text-sub);
+    margin-bottom: 40px;
+    max-width: 640px;
+  }
 
-        <script>
-            window.onload = function() {
-                document.getElementById('current-year').textContent = new Date().getFullYear();
-            };
-        </script>
-    </body>
-</html>
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.15s ease;
+  }
+
+  .btn-primary {
+    background: var(--ms-blue);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: var(--ms-blue-hover);
+  }
+
+  /* Sections */
+  section {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 96px 24px;
+  }
+
+  section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 32px;
+    text-align: center;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+
+  /* Features */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+
+  .feature-card {
+    background: var(--bg-section);
+    padding: 28px 26px;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .feature-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* History */
+  #history {
+    background: var(--bg-section);
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  #history.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    font-size: 0.95rem;
+  }
+
+  .history-table th,
+  .history-table td {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 12px 8px;
+    text-align: left;
+  }
+
+  .history-table th {
+    font-weight: 600;
+    background: #f7f7f7;
+  }
+
+  .history-table tr:hover {
+    background: #fafafa;
+  }
+
+  /* CTA */
+  .cta {
+    background: var(--bg-muted);
+    text-align: center;
+    padding: 120px 24px;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 48px 16px;
+    font-size: 0.85rem;
+    color: #777;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner" style="max-width: 960px;">
+    <h1>LogicPad</h1>
+    <p>A Windows-first visual programming platform designed for clarity, reliability, and scale.</p>
+    <script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
+    <ms-store-badge
+    	productid="9p3kn8cgsw72"
+    	productname="LogicPad"
+    	window-mode="direct"
+    	theme="auto"
+    	size="large"
+    	language="en"
+    	animation="on">
+    </ms-store-badge>
+  </div>
+</header>
+
+<section>
+  <h2>Key Features</h2>
+  <div class="features">
+    <div class="feature-card">
+      <h3>Visual Node-Based Editor</h3>
+      <p>Design workflows using an intuitive node-based interface. Connect logic visually to improve readability and maintainability.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Rich Built-in Node Library</h3>
+      <p>Includes nodes for file I/O, text processing, conditions, loops, timers, and variable handling out of the box.</p>
+    </div>
+    <div class="feature-card">
+      <h3>JavaScript Execution Nodes</h3>
+      <p>Embed custom JavaScript logic directly into workflows for advanced processing and flexible automation.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Excel Automation</h3>
+      <p>Create worksheets, read and write cells, and execute macros to automate spreadsheet-based operations.</p>
+    </div>
+    <div class="feature-card">
+      <h3>REST API Integration</h3>
+      <p>Send HTTP requests and integrate with external services using REST API nodes.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Email & Messaging Integration</h3>
+      <p>Send emails and post messages to platforms such as Microsoft Teams and Slack from workflows.</p>
+    </div>
+    <div class="feature-card">
+      <h3>HTML & Web Interaction</h3>
+      <p>Built-in HTML browser nodes enable web content loading and basic interaction within workflows.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Workflow Serialization</h3>
+      <p>Workflows are saved in a structured format to support versioning, compatibility checks, and future extensibility.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Commercial-Grade Stability</h3>
+      <p>Designed for long-term use with a focus on stability, predictable behavior, and continuous improvement.</p>
+    </div>
+  </div>
+</section>
+
+<section id="history">
+  <h2>Release History</h2>
+
+<h3>Early Beta (2021 – 2023)</h3>
+<ul class="history-list">
+  <li>Initial prototype of a node-based visual workflow editor.</li>
+  <li>Core canvas, grid rendering, node placement, and connection mechanics established.</li>
+  <li>Introduction of variables, property dialogs, and basic execution flow.</li>
+  <li>Early file, math, condition, and timing nodes implemented.</li>
+  <li>Undo/Redo, drag-and-drop, zooming, and basic UI interactions stabilized.</li>
+  <li>Multiple product renames and architectural refactoring to prepare for extensibility.</li>
+</ul>
+
+<h3>Public Preview & Feature Expansion (2024)</h3>
+<ul class="history-list">
+  <li>Major UI/UX refinements including DPI awareness and multi-monitor support.</li>
+  <li>Expanded node library: file operations, image processing, browser automation, and scripting.</li>
+  <li>Improved variable management, comments, grouping, and editor productivity features.</li>
+  <li>Stability improvements, performance tuning, and installer refinements.</li>
+</ul>
+
+<h3>Advanced Automation & Integration (2025)</h3>
+<ul class="history-list">
+  <li>Excel automation nodes for reading, writing, macro execution, and image embedding.</li>
+  <li>REST API, HTTP communication, and external service integration.</li>
+  <li>AI-related nodes including OpenAI-compatible, Claude, Gemini, Grok, and DeepSeek integrations.</li>
+  <li>Email, messaging, and social platform posting nodes.</li>
+  <li>Workflow serialization, debugging enhancements, and reliability improvements.</li>
+  <li>Ongoing UI polish, configuration dialogs, and workflow creation optimizations.</li>
+</ul>
+</section>
+
+<div class="cta" id="download">
+  <h2>Get Started</h2>
+  <p>Download LogicPad from Microsoft Store and start building visual workflows.</p>
+  <a class="btn btn-primary" href="#">Open Microsoft Store</a>
+</div>
+
+<footer>
+  © LogicPad Project. All rights reserved.
+</footer>
