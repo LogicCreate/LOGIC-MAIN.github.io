@@ -53,6 +53,16 @@
     font-weight: 600;
   }
 
+  .hero-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-title h1 {
+    margin: 0;
+  }
+
   header.hero p {
     font-size: 1.25rem;
     color: var(--text-sub);
@@ -164,8 +174,8 @@
 
 <header class="hero">
   <div class="hero-inner" style="max-width: 960px;">
-    <div style="white-space: nowrap;">
-      <img src="icon.png" width="100" height="100">
+    <div class="hero-title">
+      <img src="icon.png" width="100" height="100" alt="LogicPad icon">
       <h1>LogicPad</h1>
     </div>
     <p>A Windows-first visual programming platform designed for clarity, reliability, and scale.</p>
