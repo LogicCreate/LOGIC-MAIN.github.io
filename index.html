@@ -117,6 +117,20 @@
     transform: translateY(0);
   }
 
+  .feature-screenshot {
+    margin-bottom: 72px;          /* Key Features との間隔 */
+  }
+
+  .feature-screenshot img {
+    width: 100%;
+    height: auto;
+    max-width: 2560px;            /* 元解像度を上限に */
+    display: block;
+    margin: 0 auto;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  }    
+
   /* History */
   #history {
     background: var(--bg-section);
@@ -192,6 +206,9 @@
 </header>
 
 <section>
+  <div class="feature-screenshot">
+    <img src="screenshot.png" alt="LogicPad screenshot">
+  </div>  
   <h2>Key Features</h2>
   <div class="features">
     <div class="feature-card">
