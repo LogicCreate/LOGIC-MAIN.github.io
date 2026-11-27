@@ -3,302 +3,1103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LogicPad | Visual Programming Platform for Windows</title>
-  <meta name="description" content="LogicPad is a Windows-first visual programming platform inspired by Microsoft design principles. Build reliable automation with clarity and control.">
+  <title>LogicPad | Visual Programming &amp; AI Automation Platform for Windows</title>
+  <meta name="description" content="LogicPad is a Windows-native visual programming and AI automation platform featuring 164 built-in nodes, multi-dimensional arrays, cloud &amp; local LLMs, and a self-contained Python 3.13 runtime.">
+  <meta property="og:title" content="LogicPad — Visual Programming &amp; AI Automation for Windows">
+  <meta property="og:description" content="Design clear, reliable Windows workflows visually with 164 built-in nodes, N-D typed arrays, AI Chat flowchart generation, Excel &amp; WebView2 automation, and built-in Python 3.13 + Pillow.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://logicpad.org/">
+  <meta property="og:image" content="https://logicpad.org/screenshot.png">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
 
   <style>
   :root {
     --ms-blue: #0067c0;
-    --ms-blue-hover: #005ba1;
-    --bg-light: #f5f5f5;
-    --bg-section: #ffffff;
-    --bg-muted: #f3f4f6;
+    --ms-blue-hover: #00549e;
+    --ms-blue-soft: #eef5fc;
+    --bg-page: #f6f7f9;
+    --bg-surface: #ffffff;
+    --bg-muted: #eff1f5;
     --text-main: #111827;
-    --text-sub: #374151;
+    --text-sub: #4b5563;
+    --text-muted: #6b7280;
     --border-light: #e5e7eb;
+    --border-strong: #d1d5db;
+    --shadow-soft: 0 1px 3px rgba(15, 23, 42, 0.04), 0 6px 18px rgba(15, 23, 42, 0.04);
+    --shadow-window: 0 22px 54px rgba(15, 23, 42, 0.14), 0 4px 14px rgba(15, 23, 42, 0.06);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: "Segoe UI", "Yu Gothic UI", "Meiryo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     color: var(--text-main);
-    line-height: 1.65;
-    background: var(--bg-light);
+    line-height: 1.68;
+    background: var(--bg-page);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Hero */
-  header.hero {
-    min-height: 100vh;
+  /* Language visibility */
+  html[data-lang="en"] [data-i18n="ja"] { display: none !important; }
+  html[data-lang="ja"] [data-i18n="en"] { display: none !important; }
+
+  /* Top Navigation */
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
     padding: 0 24px;
+    height: 60px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
-      url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80");
-    background-size: cover;
-    background-position: center;
-  }
-
-  .hero-inner {
-    max-width: 960px;
-  }
-
-  header.hero h1 {
-    font-size: clamp(3rem, 5vw, 4rem);
-    margin-bottom: 20px;
-    letter-spacing: -0.02em;
-    font-weight: 600;
-  }
-
-  .hero-title {
-    display: inline-flex;
-    align-items: center;
+    justify-content: space-between;
     gap: 16px;
   }
 
-  .hero-title h1 {
-    margin: 0;
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 1.08rem;
+    letter-spacing: -0.01em;
   }
 
-  header.hero p {
-    font-size: 1.25rem;
+  .brand img {
+    width: 28px;
+    height: 28px;
+    display: block;
+  }
+
+  .version-pill {
+    font-size: 0.75rem;
+    font-weight: 500;
     color: var(--text-sub);
-    margin-bottom: 40px;
-    max-width: 640px;
+    background: var(--bg-muted);
+    border: 1px solid var(--border-light);
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.01em;
   }
 
-  /* Buttons */
-  .btn {
-    display: inline-block;
-    padding: 14px 28px;
-    border-radius: 8px;
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-links a {
+    color: var(--text-sub);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--text-main);
+  }
+
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    background: var(--bg-muted);
+    border: 1px solid var(--border-light);
+    border-radius: 7px;
+    padding: 2px;
+  }
+
+  .lang-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-sub);
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 4px 9px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .lang-btn.active {
+    background: var(--bg-surface);
+    color: var(--text-main);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Hero */
+  header.hero {
+    position: relative;
+    padding: 84px 24px 72px;
+    background-color: var(--bg-surface);
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(0, 103, 192, 0.055), transparent 62%),
+      radial-gradient(#d8dee6 1px, transparent 1px);
+    background-size: 100% 100%, 24px 24px;
+    background-position: center top, 0 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .hero-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-logo-row {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+
+  .hero-logo-wrap {
+    width: 76px;
+    height: 76px;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .hero-logo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  header.hero h1 {
+    font-size: clamp(2.5rem, 4.8vw, 3.6rem);
+    margin: 0;
+    letter-spacing: -0.025em;
+    font-weight: 650;
+    color: var(--text-main);
+  }
+
+  .hero-lead {
+    font-size: clamp(1.06rem, 1.8vw, 1.22rem);
+    color: var(--text-sub);
+    max-width: 740px;
+    margin: 0 auto 32px;
+    line-height: 1.75;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+
+  .btn-store {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ms-blue);
+    color: #ffffff;
     text-decoration: none;
     font-weight: 600;
-    transition: background 0.15s ease;
+    font-size: 0.96rem;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .btn-store:hover {
+    background: var(--ms-blue-hover);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface);
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-strong);
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .btn-secondary:hover {
+    background: var(--bg-page);
+    border-color: #9ca3af;
+  }
+
+  .metrics-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    max-width: 880px;
+    margin: 0 auto;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .metric-item {
+    text-align: center;
+  }
+
+  .metric-value {
+    font-size: 1.35rem;
+    font-weight: 650;
+    color: var(--text-main);
+    letter-spacing: -0.015em;
+  }
+
+  .metric-label {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    margin-top: 2px;
   }
 
   /* Sections */
   section {
-    max-width: 1080px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 96px 24px;
+    padding: 84px 24px;
   }
 
-  section h2 {
-    font-size: 2.2rem;
-    margin-bottom: 32px;
+  .section-header {
     text-align: center;
-    letter-spacing: -0.01em;
+    max-width: 720px;
+    margin: 0 auto 44px;
+  }
+
+  .section-header h2 {
+    font-size: clamp(1.75rem, 3vw, 2.15rem);
+    margin: 0 0 12px;
+    letter-spacing: -0.015em;
+    font-weight: 650;
+  }
+
+  .section-header p {
+    margin: 0;
+    color: var(--text-sub);
+    font-size: 1rem;
+  }
+
+  /* Interactive Showcase */
+  .showcase-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .showcase-tab {
+    border: 1px solid var(--border-light);
+    background: var(--bg-surface);
+    color: var(--text-sub);
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .showcase-tab:hover {
+    border-color: var(--border-strong);
+    color: var(--text-main);
+  }
+
+  .showcase-tab.active {
+    background: var(--text-main);
+    border-color: var(--text-main);
+    color: #ffffff;
+  }
+
+  .window-frame {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-window);
+    border: 1px solid rgba(15, 23, 42, 0.14);
+    background: #141416;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .window-frame.light {
+    background: #ffffff;
+    border-color: #d1d5db;
+  }
+
+  .window-titlebar {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    background: #1b1b1f;
+    border-bottom: 1px solid #2c2c32;
+    font-size: 0.78rem;
+    color: #d4d4d8;
+    user-select: none;
+  }
+
+  .window-frame.light .window-titlebar {
+    background: #f3f4f6;
+    border-bottom-color: #e5e7eb;
+    color: #374151;
+  }
+
+  .win-tb-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-weight: 600;
   }
 
-  /* Features */
+  .win-tb-left img {
+    width: 15px;
+    height: 15px;
+  }
+
+  .win-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.65;
+    font-size: 0.72rem;
+  }
+
+  .window-body img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .showcase-caption {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 0.94rem;
+    color: var(--text-sub);
+    min-height: 1.6em;
+  }
+
+  /* Features Grid */
   .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
   }
 
   .feature-card {
-    background: var(--bg-section);
-    padding: 28px 26px;
+    background: var(--bg-surface);
+    padding: 26px 26px;
     border-radius: 12px;
     border: 1px solid var(--border-light);
-    opacity: 1;
-    transform: none;
-    transition: none;
+    box-shadow: var(--shadow-soft);
   }
 
-  .feature-card.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .feature-screenshot {
-    margin-bottom: 72px;          /* Key Features との間隔 */
-  }
-
-  .feature-screenshot img {
-    width: 100%;
-    height: auto;
-    max-width: 2560px;            /* 元解像度を上限に */
-    display: block;
-    margin: 0 auto;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-  }    
-
-  /* History */
-  #history {
-    background: var(--bg-section);
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  #history.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .history-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 24px;
-    font-size: 0.95rem;
-  }
-
-  .history-table th,
-  .history-table td {
-    border-bottom: 1px solid #e5e5e5;
-    padding: 12px 8px;
-    text-align: left;
-  }
-
-  .history-table th {
+  .feature-tag {
+    display: inline-block;
+    font-size: 0.74rem;
     font-weight: 600;
-    background: #f7f7f7;
+    color: var(--ms-blue);
+    background: var(--ms-blue-soft);
+    padding: 2px 9px;
+    border-radius: 999px;
+    margin-bottom: 10px;
   }
 
-  .history-table tr:hover {
-    background: #fafafa;
+  .feature-card h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+    font-weight: 620;
+    color: var(--text-main);
+    text-wrap: balance;
+  }
+
+  .feature-card p {
+    margin: 0;
+    font-size: 0.93rem;
+    color: var(--text-sub);
+    line-height: 1.66;
+  }
+
+  /* Release History */
+  .surface-band {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .timeline {
+    display: grid;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .timeline-card {
+    background: var(--bg-page);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 24px 28px;
+  }
+
+  .timeline-card.latest {
+    background: #fcfdff;
+    border-color: #bfd8f2;
+  }
+
+  .timeline-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .timeline-head h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 640;
+  }
+
+  .timeline-period {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .timeline-card.latest .timeline-period {
+    color: var(--ms-blue);
+  }
+
+  .history-list {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--text-sub);
+    font-size: 0.93rem;
+  }
+
+  .history-list li + li {
+    margin-top: 6px;
   }
 
   /* CTA */
   .cta {
     background: var(--bg-muted);
     text-align: center;
-    padding: 120px 24px;
+    padding: 92px 24px;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .cta-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    font-size: clamp(1.75rem, 3vw, 2.15rem);
+    margin: 0 0 12px;
+    font-weight: 650;
+  }
+
+  .cta p {
+    color: var(--text-sub);
+    margin: 0 0 28px;
+    font-size: 1.02rem;
+  }
+
+  .store-badge-wrap {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
   }
 
   /* Footer */
   footer {
-    text-align: center;
-    padding: 48px 16px;
-    font-size: 0.85rem;
-    color: #777;
+    background: var(--bg-surface);
+    padding: 40px 24px;
+    font-size: 0.86rem;
+    color: var(--text-muted);
   }
-</style>
-<script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
+
+  .footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-links a {
+    color: var(--text-sub);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-main);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 760px) {
+    .nav-links {
+      display: none;
+    }
+    .metrics-bar {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 20px;
+    }
+    header.hero {
+      padding: 60px 20px 52px;
+    }
+    section {
+      padding: 64px 20px;
+    }
+  }
+  </style>
+  <script type="module" src="https://get.microsoft.com/badge/ms-store-badge.bundled.js"></script>
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('logicpad_lang'); } catch (e) {}
+      var initial = saved || ((navigator.language || '').toLowerCase().indexOf('ja') === 0 ? 'ja' : 'en');
+      document.documentElement.setAttribute('data-lang', initial);
+      document.documentElement.setAttribute('lang', initial);
+    })();
+  </script>
 </head>
 <body>
 
+<nav class="site-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a class="brand" href="#">
+      <img src="icon.png" alt="LogicPad logo">
+      <span>LogicPad</span>
+      <span class="version-pill">v0.0.0.94</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#showcase"><span data-i18n="en">Showcase</span><span data-i18n="ja">画面紹介</span></a>
+        <a href="#features"><span data-i18n="en">Features</span><span data-i18n="ja">主な機能</span></a>
+        <a href="#history"><span data-i18n="en">Release History</span><span data-i18n="ja">更新履歴</span></a>
+        <a href="#download"><span data-i18n="en">Download</span><span data-i18n="ja">入手方法</span></a>
+      </div>
+      <div class="lang-switch" role="group" aria-label="Language selector">
+        <button type="button" class="lang-btn" id="btn-lang-en" onclick="setLang('en')">EN</button>
+        <button type="button" class="lang-btn" id="btn-lang-ja" onclick="setLang('ja')">日本語</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
 <header class="hero">
-  <div class="hero-inner" style="max-width: 960px;">
-    <div class="hero-title">
-      <img src="icon.png" width="100" height="100" alt="LogicPad icon">
+  <div class="hero-inner">
+    <div class="hero-logo-row">
+      <div class="hero-logo-wrap">
+        <img src="icon.png" width="56" height="56" alt="LogicPad origami sailboat icon">
+      </div>
       <h1>LogicPad</h1>
     </div>
-    <p>A Windows-first visual programming platform designed for clarity, reliability, and scale.</p>
-    <ms-store-badge
-    	productid="9p3kn8cgsw72"
-    	productname="LogicPad"
-    	window-mode="direct"
-    	theme="auto"
-    	size="small"
-    	language="en"
-    	animation="on">
-    </ms-store-badge>
+
+    <p class="hero-lead" data-i18n="en">
+      A Windows-native visual programming and AI automation platform designed for clarity, reliability, and control. Build workflows effortlessly with 164 built-in nodes, multi-dimensional arrays, cloud &amp; local LLMs, and a self-contained Python 3.13 runtime.
+    </p>
+    <p class="hero-lead" data-i18n="ja">
+      明快さ・信頼性・高い制御性を備えた Windows ネイティブのビジュアルプログラミング＆AI自動化プラットフォーム。全164種の標準ノード、多次元配列、クラウド／ローカルAI連携、組込 Python 3.13 実行環境をひとつに統合しています。
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn-store" href="https://apps.microsoft.com/detail/9P3KN8CGSW72" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 21 21" fill="none" aria-hidden="true">
+          <rect x="1" y="1" width="8.5" height="8.5" fill="#ffffff" fill-opacity="0.95"/>
+          <rect x="11.5" y="1" width="8.5" height="8.5" fill="#ffffff" fill-opacity="0.95"/>
+          <rect x="1" y="11.5" width="8.5" height="8.5" fill="#ffffff" fill-opacity="0.95"/>
+          <rect x="11.5" y="11.5" width="8.5" height="8.5" fill="#ffffff" fill-opacity="0.95"/>
+        </svg>
+        <span data-i18n="en">Get it from Microsoft Store</span>
+        <span data-i18n="ja">Microsoft Store から入手</span>
+      </a>
+      <a class="btn-secondary" href="#showcase">
+        <span data-i18n="en">Explore Interface</span>
+        <span data-i18n="ja">インターフェースを見る</span>
+      </a>
+    </div>
+
+    <div class="metrics-bar">
+      <div class="metric-item">
+        <div class="metric-value">164</div>
+        <div class="metric-label"><span data-i18n="en">Built-In Standard Nodes</span><span data-i18n="ja">組込標準ノード</span></div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">1D / 2D / N-D</div>
+        <div class="metric-label"><span data-i18n="en">Typed Arrays &amp; Excel Grid</span><span data-i18n="ja">多次元配列・Excel風グリッド</span></div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">Python 3.13</div>
+        <div class="metric-label"><span data-i18n="en">Bundled with Pillow + C# / PS / JS</span><span data-i18n="ja">Pillow 標準同梱 ＋ C# / PS / JS</span></div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">97</div>
+        <div class="metric-label"><span data-i18n="en">UI Languages · Light &amp; Dark</span><span data-i18n="ja">対応言語・ライト／ダーク対応</span></div>
+      </div>
+    </div>
   </div>
 </header>
 
-<section>
-  <div class="feature-screenshot">
-    <img src="screenshot.png" alt="LogicPad screenshot">
-  </div>  
-  <h2>Key Features</h2>
+<section id="showcase">
+  <div class="section-header">
+    <h2>
+      <span data-i18n="en">Clean Workspace in Light &amp; Dark Modes</span>
+      <span data-i18n="ja">ライト／ダーク両対応の洗練されたワークスペース</span>
+    </h2>
+    <p>
+      <span data-i18n="en">High-DPI Direct2D vector rendering keeps complex node graphs, array tables, and AI explanations crisp on any display.</span>
+      <span data-i18n="ja">高DPI対応の Direct2D ベクター描画により、複雑なフローチャートや配列グリッド、AI解説も常に鮮明に表示します。</span>
+    </p>
+  </div>
+
+  <div class="showcase-tabs" role="tablist">
+    <button type="button" class="showcase-tab active" data-slide="1" onclick="selectSlide(1)">
+      <span data-i18n="en">1. AI Flowchart Builder</span><span data-i18n="ja">1. AI フロー自動構築</span>
+    </button>
+    <button type="button" class="showcase-tab" data-slide="2" onclick="selectSlide(2)">
+      <span data-i18n="en">2. Excel-Style 2D Array Grid</span><span data-i18n="ja">2. 多次元配列グリッド</span>
+    </button>
+    <button type="button" class="showcase-tab" data-slide="3" onclick="selectSlide(3)">
+      <span data-i18n="en">3. Cloud AI &amp; Local LLMs</span><span data-i18n="ja">3. クラウドAI＆ローカルLLM</span>
+    </button>
+    <button type="button" class="showcase-tab" data-slide="4" onclick="selectSlide(4)">
+      <span data-i18n="en">4. Web, Excel &amp; Python</span><span data-i18n="ja">4. Web・Excel・Python連携</span>
+    </button>
+    <button type="button" class="showcase-tab" data-slide="5" onclick="selectSlide(5)">
+      <span data-i18n="en">5. Visual Media Editors</span><span data-i18n="ja">5. 色・日時・画像エディタ</span>
+    </button>
+  </div>
+
+  <div class="window-frame" id="showcase-window">
+    <div class="window-titlebar">
+      <div class="win-tb-left">
+        <img src="icon.png" alt="">
+        <span id="showcase-wintitle">ai_kpi_pipeline.lpf — LogicPad</span>
+      </div>
+      <div class="win-dots" aria-hidden="true">
+        <span>—</span><span>□</span><span>✕</span>
+      </div>
+    </div>
+    <div class="window-body">
+      <img id="showcase-img" src="assets/showcase_en_1.png" alt="LogicPad workspace preview">
+    </div>
+  </div>
+
+  <div class="showcase-caption" id="showcase-caption"></div>
+</section>
+
+<section id="features" style="padding-top: 16px;">
+  <div class="section-header">
+    <h2>
+      <span data-i18n="en">Key Capabilities</span>
+      <span data-i18n="ja">主な機能</span>
+    </h2>
+    <p>
+      <span data-i18n="en">Prioritize visual standard nodes for clarity, and drop down into built-in scripting whenever custom algorithms are needed.</span>
+      <span data-i18n="ja">見通しの良い標準ノードを中心に構築し、高度な処理が必要な場面では組込スクリプトとも自在に連携できます。</span>
+    </p>
+  </div>
+
   <div class="features">
     <div class="feature-card">
-      <h3>Visual Node-Based Editor</h3>
-      <p>Design workflows using an intuitive node-based interface. Connect logic visually to improve readability and maintainability.</p>
+      <span class="feature-tag">AI Co-Pilot</span>
+      <h3>
+        <span data-i18n="en">AI Chat Workflow Builder &amp; Local LLMs</span>
+        <span data-i18n="ja">AI チャットによる自動構築＆ローカルLLM対応</span>
+      </h3>
+      <p data-i18n="en">Generate, explain, and control flowcharts from natural language. Supports OpenAI, Claude, Claude Code CLI, Gemini, DeepSeek, Grok, Perplexity, and local endpoints (Ollama, LM Studio, vLLM).</p>
+      <p data-i18n="ja">自然言語の対話からフローチャートの自動生成・解説・実行操作が可能。OpenAI、Claude / Claude Code CLI、Gemini、DeepSeek、Grok、Perplexity に加え、Ollama / LM Studio 等のローカルAIにも対応しています。</p>
     </div>
+
     <div class="feature-card">
-      <h3>Rich Built-in Node Library</h3>
-      <p>Includes nodes for file I/O, text processing, conditions, loops, timers, and variable handling out of the box.</p>
+      <span class="feature-tag">164 Nodes</span>
+      <h3>
+        <span data-i18n="en">Comprehensive Standard Node Library</span>
+        <span data-i18n="ja">全164種の豊富な標準ノード群</span>
+      </h3>
+      <p data-i18n="en">Combine ready-made nodes for conditionals, loops, exception handling, math functions, strings, arrays, file/folder operations, timers, clipboard, and Windows desktop control.</p>
+      <p data-i18n="ja">条件分岐・反復・例外処理・数学関数・文字列・配列操作・ファイル／フォルダ管理・タイマー・クリップボード・Windows制御など164種の標準ノードを収録しています。</p>
     </div>
+
     <div class="feature-card">
-      <h3>JavaScript Execution Nodes</h3>
-      <p>Embed custom JavaScript logic directly into workflows for advanced processing and flexible automation.</p>
+      <span class="feature-tag">Data &amp; Arrays</span>
+      <h3>
+        <span data-i18n="en">N-Dimensional Arrays &amp; Excel-Style Grid</span>
+        <span data-i18n="ja">多次元配列変数＆Excelライクなグリッド編集</span>
+      </h3>
+      <p data-i18n="en">Create 1D lists, 2D tables, and N-D arrays across all 8 data types (Number, String, Boolean, Date/Time, Color, Image, Binary) with interactive spreadsheet editing, TSV paste, and <code>matrix[r, c]</code> indexing.</p>
+      <p data-i18n="ja">数値・文字列・真偽値・日時・色・画像・バイナリの全型で1次元〜多次元配列に対応。スプレッドシート形式のグリッド編集、TSV貼り付け、<code>matrix[r, c]</code> 添字参照を備えています。</p>
     </div>
+
     <div class="feature-card">
-      <h3>Excel Automation</h3>
-      <p>Create worksheets, read and write cells, and execute macros to automate spreadsheet-based operations.</p>
+      <span class="feature-tag">Built-In Python 3.13</span>
+      <h3>
+        <span data-i18n="en">Self-Contained Python (+ Pillow) &amp; Scripting</span>
+        <span data-i18n="ja">組込 Python 3.13（Pillow 同梱）＆多彩なスクリプト</span>
+      </h3>
+      <p data-i18n="en">Includes an embedded Python 3.13 runtime with all 20 standard C extensions and Pillow (PIL) bundled out of the box—plus C#, VB.NET, PowerShell, JavaScript, VBScript, and Batch nodes.</p>
+      <p data-i18n="ja">標準C拡張一式と画像処理ライブラリ Pillow (PIL) を同梱した Python 3.13 を内蔵し、環境構築不要で即実行可能。C#、VB.NET、PowerShell、JavaScript、バッチ実行にも対応しています。</p>
     </div>
+
     <div class="feature-card">
-      <h3>REST API Integration</h3>
-      <p>Send HTTP requests and integrate with external services using REST API nodes.</p>
+      <span class="feature-tag">Web &amp; API</span>
+      <h3>
+        <span data-i18n="en">WebView2 Browser &amp; REST API Automation</span>
+        <span data-i18n="ja">内蔵 WebView2 ブラウザ＆REST API連携</span>
+      </h3>
+      <p data-i18n="en">Automate modern web apps with the built-in Chromium WebView2 browser using XPath clicks, form input, HTML extraction, and screenshots, or connect directly to HTTP REST APIs.</p>
+      <p data-i18n="ja">Chromium ベースの WebView2 内蔵ブラウザによる XPath クリック・文字入力・データ抽出・画面キャプチャや、REST API ノードによる外部Webサービス連携を行えます。</p>
     </div>
+
     <div class="feature-card">
-      <h3>Email & Messaging Integration</h3>
-      <p>Send emails and post messages to platforms such as Microsoft Teams and Slack from workflows.</p>
+      <span class="feature-tag">Office &amp; Media</span>
+      <h3>
+        <span data-i18n="en">Excel COM &amp; Image / QR Processing</span>
+        <span data-i18n="ja">Excel 自動操作＆画像・QRコード処理</span>
+      </h3>
+      <p data-i18n="en">Create Excel workbooks, read/write cells, insert images, and trigger macros. Process images natively with resize, rotation, grayscale, OpenCV template matching, and QR encode/decode nodes.</p>
+      <p data-i18n="ja">Excel ブック新規作成・セル読み書き・画像挿入・マクロ実行を自動化。画像リサイズ・回転・グレースケール・OpenCV画像マッチング・QRコード生成／読取ノードも標準搭載しています。</p>
     </div>
+
     <div class="feature-card">
-      <h3>HTML & Web Interaction</h3>
-      <p>Built-in HTML browser nodes enable web content loading and basic interaction within workflows.</p>
+      <span class="feature-tag">Graph Layout</span>
+      <h3>
+        <span data-i18n="en">Smart Topological Layout &amp; Elbow Routing</span>
+        <span data-i18n="ja">2D階層自動整列＆障害物回避エルボー矢印</span>
+      </h3>
+      <p data-i18n="en">Automatic 2D hierarchical formatting arranges branches and loops cleanly on the grid, with obstacle-aware arrow detours, non-overlapping TRUE/FALSE labels, and port fan-in.</p>
+      <p data-i18n="ja">ループや条件分岐を含むフローをグリッド上に美しく配置する2D階層自動整列と、障害物を滑らかに迂回する矢印ルーティングを搭載しています。</p>
     </div>
+
     <div class="feature-card">
-      <h3>Workflow Serialization</h3>
-      <p>Workflows are saved in a structured format to support versioning, compatibility checks, and future extensibility.</p>
+      <span class="feature-tag">Messaging</span>
+      <h3>
+        <span data-i18n="en">Email &amp; Team Collaboration Channels</span>
+        <span data-i18n="ja">メール＆ビジネスチャット通知連携</span>
+      </h3>
+      <p data-i18n="en">Deliver automated reports, alerts, and AI summaries directly to Microsoft Teams, Slack, LINE Messaging API, X (Twitter), toast notifications, and SMTP email.</p>
+      <p data-i18n="ja">処理結果やAI要約レポートを Microsoft Teams、Slack、LINE Messaging API、X、デスクトップトースト通知、メール送信へそのまま連携できます。</p>
     </div>
+
     <div class="feature-card">
-      <h3>Commercial-Grade Stability</h3>
-      <p>Designed for long-term use with a focus on stability, predictable behavior, and continuous improvement.</p>
+      <span class="feature-tag">Native UX</span>
+      <h3>
+        <span data-i18n="en">Dialog-Style Ergonomics &amp; 97 Languages</span>
+        <span data-i18n="ja">快適なキーボード操作＆97言語ネイティブUI</span>
+      </h3>
+      <p data-i18n="en">Designed with native Win32 &amp; Direct2D responsiveness: <code>Ctrl+I</code> quick node insertion, <code>Tab</code>/<code>Shift+Tab</code> property navigation, Taskbar Jump List sync, breakpoints, and 97-language UI.</p>
+      <p data-i18n="ja"><code>Ctrl+I</code> クイック挿入、プロパティでのラベルクリック＆<code>Tab</code>/<code>Shift+Tab</code> 移動、ブレークポイント・ステップ実行、タスクバージャンプリスト同期、97言語UIを備えています。</p>
     </div>
   </div>
 </section>
 
-<section id="history">
-  <h2>Release History</h2>
+<div class="surface-band">
+  <section id="history">
+    <div class="section-header">
+      <h2>
+        <span data-i18n="en">Release History</span>
+        <span data-i18n="ja">リリース履歴</span>
+      </h2>
+      <p>
+        <span data-i18n="en">Continuous engineering focused on long-term reliability, clean visual structure, and self-contained Windows automation.</span>
+        <span data-i18n="ja">長期にわたり安心して利用できる安定性と、直感的な操作性を継続的に磨き続けています。</span>
+      </p>
+    </div>
 
-<h3>Early Beta (2021 – 2023)</h3>
-<ul class="history-list">
-  <li>Initial prototype of a node-based visual workflow editor.</li>
-  <li>Core canvas, grid rendering, node placement, and connection mechanics established.</li>
-  <li>Introduction of variables, property dialogs, and basic execution flow.</li>
-  <li>Early file, math, condition, and timing nodes implemented.</li>
-  <li>Undo/Redo, drag-and-drop, zooming, and basic UI interactions stabilized.</li>
-  <li>Multiple product renames and architectural refactoring to prepare for extensibility.</li>
-</ul>
+    <div class="timeline">
+      <div class="timeline-card latest">
+        <div class="timeline-head">
+          <h3>
+            <span data-i18n="en">AI Canvas, N-D Arrays &amp; Self-Contained Runtime</span>
+            <span data-i18n="ja">AIキャンバス・多次元配列・自己完結型ランタイムへの進化</span>
+          </h3>
+          <span class="timeline-period">2026 — Latest: v0.0.0.94</span>
+        </div>
+        <ul class="history-list" data-i18n="en">
+          <li><strong>v0.0.0.94:</strong> Bundled all 20 Python 3.13 standard C-extension modules and Pillow (PIL) natively; added label-click &amp; <code>Tab</code>/<code>Shift+Tab</code> navigation in the Property Palette, preserved long scripts without length limits, and refined standard-node-first AI generation.</li>
+          <li><strong>v0.0.0.93:</strong> Introduced 1D / 2D / N-D typed array variables across all 8 types, 10 new array manipulation nodes (164 nodes total), an Excel-like spreadsheet grid editor, and a redesigned Variable Dialog.</li>
+          <li><strong>v0.0.0.91 – 0.0.0.92:</strong> Refreshed brand identity with the origami sailboat icon, added 2D topological flowchart auto-layout with elbow routing, Windows Taskbar Jump List sync, Direct2D vector &amp; math waveform icons, and Dark/Light UI polish across 97 languages.</li>
+          <li><strong>v0.0.0.84 – 0.0.0.90:</strong> Integrated multi-provider AI Chat &amp; OpenAI-compatible Local LLMs (Ollama / LM Studio / Claude Code CLI) and unified left-pane node/variable search.</li>
+        </ul>
+        <ul class="history-list" data-i18n="ja">
+          <li><strong>v0.0.0.94:</strong> Python 3.13 標準C拡張モジュール全20種と画像処理ライブラリ Pillow (PIL) を標準同梱。プロパティパレットでの項目名クリック＆<code>Tab</code>/<code>Shift+Tab</code> フォーカス移動、長文スクリプトの完全保持、標準ノード優先のAI生成最適化を実施。</li>
+          <li><strong>v0.0.0.93:</strong> 全8データ型での1次元・2次元・多次元配列変数、配列操作ノード10種（計164ノード）、Excelライクな配列グリッド編集、刷新された変数ダイアログを導入。</li>
+          <li><strong>v0.0.0.91 – 0.0.0.92:</strong> 新しい折り紙ヨットのブランドアイコンへの刷新、2Dトポロジカル自動レイアウトとエルボー曲線矢印、タスクバージャンプリスト同期、Direct2Dベクター＆数学波形アイコン、全97言語UI統合を実施。</li>
+          <li><strong>v0.0.0.84 – 0.0.0.90:</strong> マルチAIプロバイダーおよびローカルLLM（Ollama / LM Studio / Claude Code CLI）対応のAIチャット機能と、左ペイン統合検索を実装。</li>
+        </ul>
+      </div>
 
-<h3>Public Preview & Feature Expansion (2024)</h3>
-<ul class="history-list">
-  <li>Major UI/UX refinements including DPI awareness and multi-monitor support.</li>
-  <li>Expanded node library: file operations, image processing, browser automation, and scripting.</li>
-  <li>Improved variable management, comments, grouping, and editor productivity features.</li>
-  <li>Stability improvements, performance tuning, and installer refinements.</li>
-</ul>
+      <div class="timeline-card">
+        <div class="timeline-head">
+          <h3>
+            <span data-i18n="en">Advanced Automation &amp; Service Integration</span>
+            <span data-i18n="ja">高度な業務自動化と外部サービス連携</span>
+          </h3>
+          <span class="timeline-period">2025</span>
+        </div>
+        <ul class="history-list" data-i18n="en">
+          <li>Excel COM automation nodes for reading, writing, macro execution, and image embedding.</li>
+          <li>REST API communication and cloud AI service nodes (OpenAI, Claude, Gemini, Grok, DeepSeek, DeepL).</li>
+          <li>Email, Microsoft Teams, Slack, LINE, and social platform notification nodes.</li>
+          <li>Structured JSON workflow serialization, exception routing, and debugging enhancements.</li>
+        </ul>
+        <ul class="history-list" data-i18n="ja">
+          <li>Excel ブック作成・セル読み書き・マクロ実行・画像挿入を行う Excel 自動化ノード群を追加。</li>
+          <li>REST API 通信および主要クラウドAIサービス（OpenAI、Claude、Gemini、Grok、DeepSeek、DeepL）ノードを搭載。</li>
+          <li>メール送信、Microsoft Teams、Slack、LINE などのメッセージ連携ノードを拡充。</li>
+          <li>JSONベースの構造化ワークフロー保存、例外分岐、デバッグ機能を強化。</li>
+        </ul>
+      </div>
 
-<h3>Advanced Automation & Integration (2025)</h3>
-<ul class="history-list">
-  <li>Excel automation nodes for reading, writing, macro execution, and image embedding.</li>
-  <li>REST API, HTTP communication, and external service integration.</li>
-  <li>AI-related nodes including OpenAI-compatible, Claude, Gemini, Grok, and DeepSeek integrations.</li>
-  <li>Email, messaging, and social platform posting nodes.</li>
-  <li>Workflow serialization, debugging enhancements, and reliability improvements.</li>
-  <li>Ongoing UI polish, configuration dialogs, and workflow creation optimizations.</li>
-</ul>
-</section>
+      <div class="timeline-card">
+        <div class="timeline-head">
+          <h3>
+            <span data-i18n="en">Public Preview &amp; Feature Expansion</span>
+            <span data-i18n="ja">パブリックプレビューと機能拡充</span>
+          </h3>
+          <span class="timeline-period">2024</span>
+        </div>
+        <ul class="history-list" data-i18n="en">
+          <li>Per-monitor DPI awareness, docking panels, and multi-monitor UI refinements.</li>
+          <li>Expanded node library covering file operations, image processing, WebView2 browser automation, and multi-language scripting.</li>
+          <li>Comments, alignment helpers, and workflow editing productivity improvements.</li>
+        </ul>
+        <ul class="history-list" data-i18n="ja">
+          <li>マルチモニター・高DPI対応およびドッキングパネルによる柔軟な画面構成に対応。</li>
+          <li>ファイル操作、画像処理、WebView2 ブラウザ自動操作、各種スクリプト実行ノードを大幅に拡充。</li>
+          <li>コメント枠、整列補助、編集ショートカットなど生産性向上機能を追加。</li>
+        </ul>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-head">
+          <h3>
+            <span data-i18n="en">Early Beta &amp; Core Architecture</span>
+            <span data-i18n="ja">初期ベータ開発・コア基盤の確立</span>
+          </h3>
+          <span class="timeline-period">2021 – 2023</span>
+        </div>
+        <ul class="history-list" data-i18n="en">
+          <li>Established the visual node canvas, grid snapping, connection ports, and execution engine.</li>
+          <li>Introduced typed variables, property editors, Undo/Redo history, and core math/file/control nodes.</li>
+        </ul>
+        <ul class="history-list" data-i18n="ja">
+          <li>ノードベースキャンバスの設計、グリッド吸着、ポート接続、実行エンジンの基盤を構築。</li>
+          <li>型付き変数、プロパティ編集、Undo/Redo 履歴管理、基本制御・数値・ファイルノードを実装。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
 
 <div class="cta" id="download">
-  <h2>Get Started</h2>
-  <p>Download LogicPad from Microsoft Store and start building visual workflows.</p>
-    <ms-store-badge
-    	productid="9p3kn8cgsw72"
-    	productname="LogicPad"
-    	window-mode="direct"
-    	theme="auto"
-    	size="large"
-    	language="en"
-    	animation="on">
-    </ms-store-badge>
+  <div class="cta-inner">
+    <h2>
+      <span data-i18n="en">Get Started with LogicPad</span>
+      <span data-i18n="ja">LogicPad をはじめる</span>
+    </h2>
+    <p>
+      <span data-i18n="en">Available officially on Microsoft Store for Windows 10 and Windows 11 (x64) with automatic updates.</span>
+      <span data-i18n="ja">Windows 10 / Windows 11 (x64) 向けに Microsoft Store にて公式配信しています。</span>
+    </p>
+    <div>
+      <a class="btn-store" href="https://apps.microsoft.com/detail/9P3KN8CGSW72" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 21 21" fill="none" aria-hidden="true">
+          <rect x="1" y="1" width="8.5" height="8.5" fill="#ffffff" fill-opacity="0.95"/>
+          <rect x="11.5" y="1" width="8.5" height="8.5" fill="#ffffff" fill-opacity="0.95"/>
+          <rect x="1" y="11.5" width="8.5" height="8.5" fill="#ffffff" fill-opacity="0.95"/>
+          <rect x="11.5" y="11.5" width="8.5" height="8.5" fill="#ffffff" fill-opacity="0.95"/>
+        </svg>
+        <span data-i18n="en">Open in Microsoft Store</span>
+        <span data-i18n="ja">Microsoft Store を開く</span>
+      </a>
+    </div>
+    <div class="store-badge-wrap">
+      <ms-store-badge
+        id="ms-badge-bottom"
+        productid="9p3kn8cgsw72"
+        productname="LogicPad"
+        window-mode="direct"
+        theme="auto"
+        size="large"
+        language="en"
+        animation="on">
+      </ms-store-badge>
+    </div>
+  </div>
 </div>
 
 <footer>
-  © LogicPad Project. All rights reserved.
+  <div class="footer-inner">
+    <div>© LogicPad Project. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="https://apps.microsoft.com/detail/9P3KN8CGSW72" target="_blank" rel="noopener">Microsoft Store</a>
+      <a href="https://github.com/LogicCreate/LOGIC-MAIN.github.io/releases" target="_blank" rel="noopener">
+        <span data-i18n="en">Release Notes</span><span data-i18n="ja">リリースノート</span>
+      </a>
+      <a href="privacy.html">
+        <span data-i18n="en">Privacy Policy</span><span data-i18n="ja">プライバシーポリシー</span>
+      </a>
+      <a href="feedback.html" target="_blank" rel="noopener">
+        <span data-i18n="en">Feedback</span><span data-i18n="ja">フィードバック</span>
+      </a>
+    </div>
+  </div>
 </footer>
 
+<script>
+  var SLIDES = {
+    1: {
+      theme: 'dark',
+      title: 'ai_kpi_pipeline.lpf — LogicPad',
+      en: 'Dark Mode — Build and explain multi-step KPI workflows automatically through natural-language AI Chat.',
+      ja: 'ダークモード — AIチャットとの自然言語の対話から、分岐を含むワークフローを自動構築しステップ順に解説します。'
+    },
+    2: {
+      theme: 'light',
+      title: 'sales_matrix_2d.lpf — LogicPad',
+      en: 'Light Mode — Edit 2D & multi-dimensional typed arrays in an interactive Excel-style grid with 1-click type chips.',
+      ja: 'ライトモード — 1クリック型選択チップと Excel ライクなグリッドにより、2次元・多次元配列を直感的に一覧・編集できます。'
+    },
+    3: {
+      theme: 'dark',
+      title: 'local_llm_audit.lpf — LogicPad',
+      en: 'Dark Mode — Combine OpenAI, Anthropic Claude, Gemini, DeepSeek, and local Ollama / LM Studio models seamlessly.',
+      ja: 'ダークモード — OpenAI・Claude・Gemini などのクラウドAIと、Ollama / LM Studio 等のローカルLLMを自在に連携できます。'
+    },
+    4: {
+      theme: 'light',
+      title: 'web_excel_python.lpf — LogicPad',
+      en: 'Light Mode — Quick-insert (Ctrl+I) across 164 built-in nodes spanning WebView2 XPath, Python 3.13 + Pillow, and Excel COM.',
+      ja: 'ライトモード — Ctrl+I クイック挿入で WebView2 抽出・組込 Python 3.13 + Pillow・Excel 自動書き込みまで一貫して自動化。'
+    },
+    5: {
+      theme: 'dark',
+      title: 'color_media_loop.lpf — LogicPad',
+      en: 'Dark Mode — Dedicated visual editors for Color (#RRGGBBAA), Calendar Date/Time, Image, and Binary array elements.',
+      ja: 'ダークモード — 色（#RRGGBBAA同期）・カレンダー日時・透過画像・バイナリの配列要素も専用ビジュアルエディタで精密に制御。'
+    }
+  };
+
+  var currentSlide = 1;
+
+  function currentLang() {
+    return document.documentElement.getAttribute('data-lang') === 'ja' ? 'ja' : 'en';
+  }
+
+  function renderSlide() {
+    var lang = currentLang();
+    var info = SLIDES[currentSlide] || SLIDES[1];
+    var win = document.getElementById('showcase-window');
+    var img = document.getElementById('showcase-img');
+    var wt = document.getElementById('showcase-wintitle');
+    var cap = document.getElementById('showcase-caption');
+
+    if (win) {
+      if (info.theme === 'light') win.classList.add('light');
+      else win.classList.remove('light');
+    }
+    if (img) {
+      img.src = 'assets/showcase_' + lang + '_' + currentSlide + '.png';
+    }
+    if (wt) {
+      wt.textContent = info.title;
+    }
+    if (cap) {
+      cap.textContent = info[lang];
+    }
+
+    var tabs = document.querySelectorAll('.showcase-tab');
+    for (var i = 0; i < tabs.length; i++) {
+      var s = parseInt(tabs[i].getAttribute('data-slide'), 10);
+      if (s === currentSlide) tabs[i].classList.add('active');
+      else tabs[i].classList.remove('active');
+    }
+  }
+
+  function selectSlide(idx) {
+    currentSlide = idx;
+    renderSlide();
+  }
+
+  function syncLangUI() {
+    var lang = currentLang();
+    var bEn = document.getElementById('btn-lang-en');
+    var bJa = document.getElementById('btn-lang-ja');
+    if (bEn) bEn.classList.toggle('active', lang === 'en');
+    if (bJa) bJa.classList.toggle('active', lang === 'ja');
+
+    var badge = document.getElementById('ms-badge-bottom');
+    if (badge) {
+      badge.setAttribute('language', lang === 'ja' ? 'ja' : 'en');
+    }
+    document.title = lang === 'ja'
+      ? 'LogicPad | Windows 向けビジュアルプログラミング＆AI自動化プラットフォーム'
+      : 'LogicPad | Visual Programming & AI Automation Platform for Windows';
+    renderSlide();
+  }
+
+  function setLang(lang) {
+    var normalized = lang === 'ja' ? 'ja' : 'en';
+    document.documentElement.setAttribute('data-lang', normalized);
+    document.documentElement.setAttribute('lang', normalized);
+    try { localStorage.setItem('logicpad_lang', normalized); } catch (e) {}
+    syncLangUI();
+  }
+
+  syncLangUI();
+</script>
 </body>
 </html>
