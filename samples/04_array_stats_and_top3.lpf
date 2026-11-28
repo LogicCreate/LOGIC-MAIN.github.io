@@ -1,0 +1,242 @@
+{
+  "version": "0.0.0.94",
+  "position": {
+    "x": 350.0,
+    "y": 300.0
+  },
+  "zoom": 1.0,
+  "objects": {
+    "variables": [
+      {
+        "id": 1,
+        "name": "scores",
+        "type": "number",
+        "is_array": true,
+        "shape": [
+          7
+        ],
+        "value": [
+          72,
+          95,
+          88,
+          95,
+          64,
+          100,
+          81
+        ]
+      },
+      {
+        "id": 2,
+        "name": "avg_score",
+        "type": "number",
+        "value": "0"
+      },
+      {
+        "id": 3,
+        "name": "uniq_scores",
+        "type": "number",
+        "is_array": true,
+        "shape": [
+          0
+        ],
+        "value": []
+      },
+      {
+        "id": 4,
+        "name": "top3_text",
+        "type": "string",
+        "value": ""
+      }
+    ],
+    "nodes": [
+      {
+        "id": 10,
+        "type": "start",
+        "position": {
+          "x": 350.0,
+          "y": 100.0
+        }
+      },
+      {
+        "id": 11,
+        "type": "arraystats",
+        "position": {
+          "x": 350.0,
+          "y": 275.0
+        },
+        "params": [
+          {
+            "variable": 1
+          },
+          {
+            "type": "string",
+            "value": "avg"
+          },
+          {
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "variable": 2
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "type": "arraytransform",
+        "position": {
+          "x": 350.0,
+          "y": 450.0
+        },
+        "params": [
+          {
+            "variable": 1
+          },
+          {
+            "type": "string",
+            "value": "unique"
+          },
+          {
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "variable": 3
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "type": "arraysort",
+        "position": {
+          "x": 350.0,
+          "y": 625.0
+        },
+        "params": [
+          {
+            "variable": 3
+          },
+          {
+            "type": "bool",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "type": "arraytransform",
+        "position": {
+          "x": 350.0,
+          "y": 800.0
+        },
+        "params": [
+          {
+            "variable": 3
+          },
+          {
+            "type": "string",
+            "value": "slice"
+          },
+          {
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "type": "number",
+            "value": "3"
+          },
+          {
+            "variable": 3
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "type": "arrayjoin",
+        "position": {
+          "x": 350.0,
+          "y": 975.0
+        },
+        "params": [
+          {
+            "variable": 3
+          },
+          {
+            "type": "string",
+            "value": " / "
+          },
+          {
+            "variable": 4
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "type": "output",
+        "position": {
+          "x": 350.0,
+          "y": 1150.0
+        },
+        "params": [
+          {
+            "variable": 4
+          },
+          {
+            "type": "bool",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "type": "end",
+        "position": {
+          "x": 350.0,
+          "y": 1325.0
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": 100,
+        "from": 10,
+        "to": 11
+      },
+      {
+        "id": 101,
+        "from": 11,
+        "to": 12
+      },
+      {
+        "id": 102,
+        "from": 12,
+        "to": 13
+      },
+      {
+        "id": 103,
+        "from": 13,
+        "to": 14
+      },
+      {
+        "id": 104,
+        "from": 14,
+        "to": 15
+      },
+      {
+        "id": 105,
+        "from": 15,
+        "to": 16
+      },
+      {
+        "id": 106,
+        "from": 16,
+        "to": 17
+      }
+    ],
+    "comments": []
+  }
+}

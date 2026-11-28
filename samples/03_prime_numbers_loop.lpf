@@ -1,0 +1,223 @@
+{
+  "version": "0.0.0.94",
+  "position": {
+    "x": 350.0,
+    "y": 300.0
+  },
+  "zoom": 1.0,
+  "objects": {
+    "variables": [
+      {
+        "id": 1,
+        "name": "n",
+        "type": "number",
+        "value": "2"
+      },
+      {
+        "id": 2,
+        "name": "is_prime",
+        "type": "bool",
+        "value": false
+      }
+    ],
+    "nodes": [
+      {
+        "id": 10,
+        "type": "start",
+        "position": {
+          "x": 350.0,
+          "y": 100.0
+        }
+      },
+      {
+        "id": 11,
+        "type": "assign",
+        "position": {
+          "x": 350.0,
+          "y": 275.0
+        },
+        "params": [
+          {
+            "variable": 1
+          },
+          {
+            "type": "number",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "type": "if",
+        "position": {
+          "x": 350.0,
+          "y": 450.0
+        },
+        "params": [
+          {
+            "variable": 1
+          },
+          {
+            "type": "string",
+            "value": "<="
+          },
+          {
+            "type": "number",
+            "value": "50"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "type": "isprime",
+        "position": {
+          "x": 350.0,
+          "y": 625.0
+        },
+        "params": [
+          {
+            "variable": 1
+          },
+          {
+            "variable": 2
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "type": "if",
+        "position": {
+          "x": 350.0,
+          "y": 800.0
+        },
+        "params": [
+          {
+            "variable": 2
+          },
+          {
+            "type": "string",
+            "value": "="
+          },
+          {
+            "type": "bool",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "type": "output",
+        "position": {
+          "x": 350.0,
+          "y": 975.0
+        },
+        "params": [
+          {
+            "variable": 1
+          },
+          {
+            "type": "bool",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "type": "increment",
+        "position": {
+          "x": 350.0,
+          "y": 1150.0
+        },
+        "params": [
+          {
+            "variable": 1
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "type": "end",
+        "position": {
+          "x": 625.0,
+          "y": 450.0
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": 100,
+        "from": 10,
+        "to": 11
+      },
+      {
+        "id": 101,
+        "from": 11,
+        "to": 12
+      },
+      {
+        "id": 102,
+        "from": 12,
+        "to": 13,
+        "condition": true,
+        "params": [
+          {
+            "type": "bool",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 103,
+        "from": 12,
+        "to": 17,
+        "condition": false,
+        "params": [
+          {
+            "type": "bool",
+            "value": false
+          }
+        ]
+      },
+      {
+        "id": 104,
+        "from": 13,
+        "to": 14
+      },
+      {
+        "id": 105,
+        "from": 14,
+        "to": 15,
+        "condition": true,
+        "params": [
+          {
+            "type": "bool",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 106,
+        "from": 14,
+        "to": 16,
+        "condition": false,
+        "params": [
+          {
+            "type": "bool",
+            "value": false
+          }
+        ]
+      },
+      {
+        "id": 107,
+        "from": 15,
+        "to": 16
+      },
+      {
+        "id": 108,
+        "from": 16,
+        "to": 12
+      }
+    ],
+    "comments": []
+  }
+}

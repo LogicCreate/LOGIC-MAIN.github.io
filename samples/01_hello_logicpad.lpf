@@ -1,0 +1,71 @@
+{
+  "version": "0.0.0.94",
+  "position": {
+    "x": 350.0,
+    "y": 300.0
+  },
+  "zoom": 1.0,
+  "objects": {
+    "variables": [],
+    "nodes": [
+      {
+        "id": 1,
+        "type": "start",
+        "position": {
+          "x": 350.0,
+          "y": 100.0
+        }
+      },
+      {
+        "id": 2,
+        "type": "output",
+        "position": {
+          "x": 350.0,
+          "y": 275.0
+        },
+        "params": [
+          {
+            "type": "string",
+            "value": "こんにちは、LogicPad！はじめての自動実行に成功しました！"
+          },
+          {
+            "type": "bool",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "type": "end",
+        "position": {
+          "x": 350.0,
+          "y": 450.0
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": 10,
+        "from": 1,
+        "to": 2
+      },
+      {
+        "id": 11,
+        "from": 2,
+        "to": 3
+      }
+    ],
+    "comments": [
+      {
+        "id": 100,
+        "position": {
+          "x": 50.0,
+          "y": 275.0
+        },
+        "width": 225.0,
+        "height": 100.0,
+        "text": "F5キーを押すと出力ウィンドウにメッセージが表示されます"
+      }
+    ]
+  }
+}

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LogicPad Getting Started &amp; Complete Guidebook | 20 Chapters &amp; Full 213-Node Reference</title>
+  <meta name="description" content="Official LogicPad textbook and reference across all 97 languages: 3-minute beginner quick start, 20 chapters, interactive localized diagrams &amp; charts, and all 213 built-in nodes.">
+  <meta property="og:title" content="LogicPad Getting Started &amp; Complete Guidebook">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://logicpad.org/guide.html">
+  <meta property="og:image" content="https://logicpad.org/screenshot.png">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body data-page="guide">
+
+<nav class="site-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a class="brand" href="index.html" data-keep-lang>
+      <img src="icon.png" alt="LogicPad logo">
+      <span>LogicPad</span>
+      <span class="version-pill" id="nav-version-pill">213 nodes · 97 🌐</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="index.html" data-keep-lang id="nav-home">Home</a>
+        <a href="#quickstart" class="nav-guide-pill" id="nav-guide">Getting Started &amp; Guide</a>
+        <a href="#reference" id="nav-reference">213-Node Reference</a>
+        <a href="https://apps.microsoft.com/detail/9P3KN8CGSW72" target="_blank" rel="noopener" id="nav-download">Download</a>
+      </div>
+      <button type="button" class="lang-picker-btn" id="lp-lang-btn" aria-label="Select Language">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        <span id="lp-cur-lang-native">English</span>
+        <span class="lang-code-badge" id="lp-cur-lang-code">EN</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="guide-hero">
+  <div class="guide-hero-inner">
+    <span class="eyebrow-pill" id="guide-badge">Official Web Edition · 8 Parts · 20 Chapters · Complete 213-Node Reference</span>
+    <h1 id="guide-h1">LogicPad Getting Started &amp; Complete Guidebook</h1>
+    <p id="guide-lead">Master LogicPad from zero programming experience: build your first workflow in 3 minutes, understand variables, conditionals, loops, and 2D arrays visually, harness AI generation, automate Excel, WebView2, offline OCR, and desktop RPA, and search every single one of the 213 built-in nodes.</p>
+  </div>
+</header>
+
+<div class="guide-shell">
+  <aside class="guide-sidebar" aria-label="Table of Contents">
+    <div class="toc-heading" id="toc-heading">Guide Navigation</div>
+    <ul class="toc-list" id="guide-toc-list"></ul>
+  </aside>
+
+  <main class="guide-main">
+    <section class="guide-card" id="roadmaps">
+      <h2 id="rm-h2">Choose Your Ideal Learning Path</h2>
+      <div class="roadmap-grid" id="rm-grid"></div>
+    </section>
+
+    <section class="guide-card" id="quickstart">
+      <h2 id="qs-h2">Build Your First Workflow in 3 Minutes: "Hello, LogicPad!"</h2>
+      <p id="qs-p" style="color:#4b5563;margin:0;"></p>
+      <div class="qs-grid" id="qs-grid"></div>
+    </section>
+
+    <div id="chapters-container" style="display:grid;gap:24px;"></div>
+
+    <div class="part-banner" id="part-7">Part VIII: Complete 213-Node Reference, Cheat Sheets &amp; FAQ</div>
+
+    <section class="guide-card" id="reference">
+      <h2 id="ref-h2">Complete 213-Node Interactive Encyclopedia</h2>
+      <p id="ref-p" style="color:#4b5563;margin:0 0 12px;"></p>
+      <div class="ref-controls">
+        <input type="search" class="ref-search" id="ref-search-input" autocomplete="off">
+        <div class="cat-pills" id="ref-cat-pills"></div>
+        <div id="ref-showing-count" style="font-size:0.84rem;font-weight:600;color:#64748b;"></div>
+      </div>
+      <div class="table-scroll" style="max-height:680px;overflow-y:auto;">
+        <table class="lp-table">
+          <thead>
+            <tr>
+              <th id="ref-th-id" style="width:62px;">ID</th>
+              <th id="ref-th-name" style="min-width:170px;">Node Name / type</th>
+              <th id="ref-th-cat" style="min-width:110px;">Category</th>
+              <th id="ref-th-desc" style="min-width:240px;">Description</th>
+              <th id="ref-th-params" style="min-width:240px;">Ordered Parameters</th>
+            </tr>
+          </thead>
+          <tbody id="ref-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="guide-card" id="cheatsheets">
+      <h2 id="cs-h2">Desk-Side Quick Reference Cheat Sheets</h2>
+      <p id="cs-p" style="color:#4b5563;margin:0;"></p>
+      <div class="tab-bar" id="cs-tabs"></div>
+      <div class="table-scroll">
+        <table class="lp-table">
+          <thead>
+            <tr>
+              <th id="cs-th-item" style="width:34%;">Shortcut / Syntax</th>
+              <th id="cs-th-desc">Behavior &amp; Practical Example</th>
+            </tr>
+          </thead>
+          <tbody id="cs-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="guide-card" id="samples">
+      <h2 id="smp-h2">Downloadable Runnable Sample Workflows (.lpf)</h2>
+      <p id="smp-p" style="color:#4b5563;margin:0;"></p>
+      <div class="samples-grid" id="smp-grid"></div>
+    </section>
+
+    <section class="guide-card" id="faq">
+      <h2 id="fq-h2">Troubleshooting FAQ &amp; Beginner-Friendly Glossary</h2>
+      <div class="tab-bar" id="fq-tabs"></div>
+      <div id="fq-body"></div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div id="ft-rights">© LogicPad Project. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="index.html" data-keep-lang id="ft-home">Home</a>
+      <a href="#quickstart" id="ft-guide">Getting Started &amp; Guide</a>
+      <a href="https://apps.microsoft.com/detail/9P3KN8CGSW72" target="_blank" rel="noopener">Microsoft Store</a>
+      <a href="https://github.com/LogicCreate/LOGIC-MAIN.github.io/releases" target="_blank" rel="noopener" id="ft-release">Release Notes</a>
+      <a href="privacy.html" data-keep-lang id="ft-privacy">Privacy Policy</a>
+      <a href="feedback.html" target="_blank" rel="noopener" id="ft-feedback">Feedback</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/lang-manifest.js"></script>
+<script src="js/diagrams.js"></script>
+<script src="js/i18n-core.js"></script>
+</body>
+</html>

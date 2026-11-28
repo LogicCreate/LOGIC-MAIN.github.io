@@ -1,0 +1,161 @@
+{
+  "version": "0.0.0.94",
+  "position": {
+    "x": 350.0,
+    "y": 300.0
+  },
+  "zoom": 1.0,
+  "objects": {
+    "variables": [
+      {
+        "id": 1,
+        "name": "score",
+        "type": "number",
+        "value": "85"
+      },
+      {
+        "id": 2,
+        "name": "result_msg",
+        "type": "string",
+        "value": ""
+      }
+    ],
+    "nodes": [
+      {
+        "id": 10,
+        "type": "start",
+        "position": {
+          "x": 350.0,
+          "y": 100.0
+        }
+      },
+      {
+        "id": 11,
+        "type": "if",
+        "position": {
+          "x": 350.0,
+          "y": 275.0
+        },
+        "params": [
+          {
+            "variable": 1
+          },
+          {
+            "type": "string",
+            "value": ">="
+          },
+          {
+            "type": "number",
+            "value": "80"
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "type": "assign",
+        "position": {
+          "x": 350.0,
+          "y": 450.0
+        },
+        "params": [
+          {
+            "variable": 2
+          },
+          {
+            "type": "string",
+            "value": "合格（優秀評価 Aランク）です！"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "type": "assign",
+        "position": {
+          "x": 625.0,
+          "y": 450.0
+        },
+        "params": [
+          {
+            "variable": 2
+          },
+          {
+            "type": "string",
+            "value": "再挑戦（あと少しで合格）です。"
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "type": "output",
+        "position": {
+          "x": 350.0,
+          "y": 625.0
+        },
+        "params": [
+          {
+            "variable": 2
+          },
+          {
+            "type": "bool",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "type": "end",
+        "position": {
+          "x": 350.0,
+          "y": 800.0
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": 100,
+        "from": 10,
+        "to": 11
+      },
+      {
+        "id": 101,
+        "from": 11,
+        "to": 12,
+        "condition": true,
+        "params": [
+          {
+            "type": "bool",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 102,
+        "from": 11,
+        "to": 13,
+        "condition": false,
+        "params": [
+          {
+            "type": "bool",
+            "value": false
+          }
+        ]
+      },
+      {
+        "id": 103,
+        "from": 12,
+        "to": 14
+      },
+      {
+        "id": 104,
+        "from": 13,
+        "to": 14
+      },
+      {
+        "id": 105,
+        "from": 14,
+        "to": 15
+      }
+    ],
+    "comments": []
+  }
+}

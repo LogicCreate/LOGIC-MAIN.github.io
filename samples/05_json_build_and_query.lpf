@@ -1,0 +1,126 @@
+{
+  "version": "0.0.0.94",
+  "position": {
+    "x": 350.0,
+    "y": 300.0
+  },
+  "zoom": 1.0,
+  "objects": {
+    "variables": [
+      {
+        "id": 1,
+        "name": "json_doc",
+        "type": "string",
+        "value": "{}"
+      },
+      {
+        "id": 2,
+        "name": "emp_name",
+        "type": "string",
+        "value": ""
+      }
+    ],
+    "nodes": [
+      {
+        "id": 10,
+        "type": "start",
+        "position": {
+          "x": 350.0,
+          "y": 100.0
+        }
+      },
+      {
+        "id": 11,
+        "type": "jsonset",
+        "position": {
+          "x": 350.0,
+          "y": 275.0
+        },
+        "params": [
+          {
+            "variable": 1
+          },
+          {
+            "type": "string",
+            "value": "department.leader.name"
+          },
+          {
+            "type": "string",
+            "value": "山田太郎"
+          },
+          {
+            "variable": 1
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "type": "jsonget",
+        "position": {
+          "x": 350.0,
+          "y": 450.0
+        },
+        "params": [
+          {
+            "variable": 1
+          },
+          {
+            "type": "string",
+            "value": "department.leader.name"
+          },
+          {
+            "variable": 2
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "type": "output",
+        "position": {
+          "x": 350.0,
+          "y": 625.0
+        },
+        "params": [
+          {
+            "variable": 2
+          },
+          {
+            "type": "bool",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "type": "end",
+        "position": {
+          "x": 350.0,
+          "y": 800.0
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": 100,
+        "from": 10,
+        "to": 11
+      },
+      {
+        "id": 101,
+        "from": 11,
+        "to": 12
+      },
+      {
+        "id": 102,
+        "from": 12,
+        "to": 13
+      },
+      {
+        "id": 103,
+        "from": 13,
+        "to": 14
+      }
+    ],
+    "comments": []
+  }
+}

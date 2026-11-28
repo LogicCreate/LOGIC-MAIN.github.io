@@ -1,0 +1,175 @@
+{
+  "version": "0.0.0.94",
+  "position": {
+    "x": 350.0,
+    "y": 300.0
+  },
+  "zoom": 1.0,
+  "objects": {
+    "variables": [
+      {
+        "id": 1,
+        "name": "raw_text",
+        "type": "string",
+        "value": "  連絡先: info@logicpad.org または support@example.co.jp まで  "
+      },
+      {
+        "id": 2,
+        "name": "trimmed",
+        "type": "string",
+        "value": ""
+      },
+      {
+        "id": 3,
+        "name": "emails",
+        "type": "string",
+        "is_array": true,
+        "shape": [
+          0
+        ],
+        "value": []
+      },
+      {
+        "id": 4,
+        "name": "joined",
+        "type": "string",
+        "value": ""
+      }
+    ],
+    "nodes": [
+      {
+        "id": 10,
+        "type": "start",
+        "position": {
+          "x": 350.0,
+          "y": 100.0
+        }
+      },
+      {
+        "id": 11,
+        "type": "stringtrim",
+        "position": {
+          "x": 350.0,
+          "y": 275.0
+        },
+        "params": [
+          {
+            "variable": 1
+          },
+          {
+            "type": "string",
+            "value": "both"
+          },
+          {
+            "variable": 2
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "type": "regex",
+        "position": {
+          "x": 350.0,
+          "y": 450.0
+        },
+        "params": [
+          {
+            "type": "string",
+            "value": "extract_all"
+          },
+          {
+            "variable": 2
+          },
+          {
+            "type": "string",
+            "value": "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+          },
+          {
+            "type": "string",
+            "value": ""
+          },
+          {
+            "type": "bool",
+            "value": true
+          },
+          {
+            "variable": 3
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "type": "arrayjoin",
+        "position": {
+          "x": 350.0,
+          "y": 625.0
+        },
+        "params": [
+          {
+            "variable": 3
+          },
+          {
+            "type": "string",
+            "value": ", "
+          },
+          {
+            "variable": 4
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "type": "output",
+        "position": {
+          "x": 350.0,
+          "y": 800.0
+        },
+        "params": [
+          {
+            "variable": 4
+          },
+          {
+            "type": "bool",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "type": "end",
+        "position": {
+          "x": 350.0,
+          "y": 975.0
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": 100,
+        "from": 10,
+        "to": 11
+      },
+      {
+        "id": 101,
+        "from": 11,
+        "to": 12
+      },
+      {
+        "id": 102,
+        "from": 12,
+        "to": 13
+      },
+      {
+        "id": 103,
+        "from": 13,
+        "to": 14
+      },
+      {
+        "id": 104,
+        "from": 14,
+        "to": 15
+      }
+    ],
+    "comments": []
+  }
+}
