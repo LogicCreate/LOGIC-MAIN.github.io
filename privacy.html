@@ -17,7 +17,7 @@
       <span>LogicPad</span>
     </a>
     <div class="nav-right">
-      <div class="nav-links">
+      <div class="nav-links" id="lp-nav-links">
         <a href="index.html" data-keep-lang id="pv-back">← Back to LogicPad Home</a>
         <a href="guide.html" data-keep-lang class="nav-guide-pill" id="nav-guide">Getting Started &amp; Guide</a>
       </div>
@@ -25,8 +25,16 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
         </svg>
-        <span id="lp-cur-lang-native">English</span>
+        <span class="lang-cur-native" id="lp-cur-lang-native">English</span>
         <span class="lang-code-badge" id="lp-cur-lang-code">EN</span>
+      </button>
+      <button type="button" class="nav-menu-btn" id="lp-nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="lp-nav-links">
+        <svg class="icon-bars" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+        <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
       </button>
     </div>
   </div>

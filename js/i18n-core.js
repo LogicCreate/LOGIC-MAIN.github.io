@@ -630,9 +630,66 @@
   };
 
   document.addEventListener('DOMContentLoaded', function () {
+    var siteNav = document.querySelector('.site-nav');
+    var navToggle = document.getElementById('lp-nav-toggle');
+    var navLinks = document.getElementById('lp-nav-links');
+
+    function closeMobileMenu() {
+      if (siteNav && siteNav.classList.contains('menu-open')) {
+        siteNav.classList.remove('menu-open');
+        if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    if (navToggle && siteNav) {
+      navToggle.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        var isOpen = siteNav.classList.toggle('menu-open');
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
+    if (navLinks) {
+      navLinks.addEventListener('click', function (ev) {
+        if (ev.target && ev.target.closest('a')) {
+          closeMobileMenu();
+        }
+      });
+    }
+    document.addEventListener('click', function (ev) {
+      if (siteNav && !siteNav.contains(ev.target)) {
+        closeMobileMenu();
+      }
+    });
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape') closeMobileMenu();
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 980) closeMobileMenu();
+    });
+
+    // Collapsible TOC sidebar on mobile/tablet (<= 980px)
+    var guideSidebar = document.querySelector('.guide-sidebar');
+    var tocHeading = document.getElementById('toc-heading');
+    var tocListEl = document.getElementById('guide-toc-list');
+    if (guideSidebar && tocHeading) {
+      tocHeading.addEventListener('click', function () {
+        if (window.innerWidth <= 980) {
+          guideSidebar.classList.toggle('toc-open');
+        }
+      });
+    }
+    if (guideSidebar && tocListEl) {
+      tocListEl.addEventListener('click', function (ev) {
+        if (window.innerWidth <= 980 && ev.target && ev.target.closest('a')) {
+          guideSidebar.classList.remove('toc-open');
+        }
+      });
+    }
+
     var langBtn = document.getElementById('lp-lang-btn');
     if (langBtn) {
       langBtn.addEventListener('click', function () {
+        closeMobileMenu();
         var bd = document.getElementById('lp-lang-backdrop');
         if (bd) {
           bd.classList.add('open');
